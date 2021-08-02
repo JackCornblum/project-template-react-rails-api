@@ -1,20 +1,20 @@
-import Container from 'react-bootstrap/Container'
+import {Container, Row} from 'react-bootstrap'
+import GameCard from './GameCard'
 
 
 
 function MyGames({userGames, setUserGames}) {
 
-    // let inProgressGameCards = userGames.map(game => {
-    //     <Row key={game.name}>
-    //     <GameCard image={game.image} name={game.name} genre={game.genre} timePlayed={game.timePlayed} />
-    //     </Row> }
-    // )
+    let inProgressGameCards = userGames.map(game => {
+        return(
+        <GameCard image={game.image} name={game.name} genre={game.genre} timePlayed={game.timePlayed} /> )}
+    )
 
-
+console.log(userGames)
     return (
         <>
-        {/* <h3> My Games Page </h3>
-            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingBottom: "20px", paddingTop: '10px'}}>
+        <h3> My Games Page </h3>
+            <div>
         <h2>My Interested Games</h2>
         <br/>
         <h2>My In-progress Games</h2>
@@ -24,7 +24,7 @@ function MyGames({userGames, setUserGames}) {
         <br/>
         <h2>My Completed Games</h2>
         <br/>
-        </div> */}
+        </div>
         </>
     )
    }

@@ -43,8 +43,10 @@ function Login({setCurrentGamer}) {
                 <Form.Control type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </Form.Group>
             <Button type="submit" id="login-button">Login</Button>
-            {/* {errors? : null} */}
         </Form>
+            {errors? errors.map(e => {
+                return <Form.Text>{e}</Form.Text>
+            }) : null}
      </>
  )
 }
