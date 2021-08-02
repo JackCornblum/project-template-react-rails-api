@@ -1,4 +1,5 @@
 class GamersController < ApplicationController
+    skip_before_action :authorize, only: :create
 
     def index
         gamers = Gamer.all
@@ -10,13 +11,15 @@ class GamersController < ApplicationController
         render json: gamer
     end
 
+    def get_games
+        gamer = Gamer.find(params[:id])
+        render json: gamer.games
+    end
+
     def create
-        gamer = Gamer.create(gamer_params)
-        if gamer.valid?
-            render json: gamer
-        else
-            render json: {message: gamer.errors.full_messages}, status: :unprocessable_entity
-        end
+        gamer = Gamer.create!(gamer_params)
+        session[:gamer_id] = gamer.id
+        render json: gamer, status: :created
     end
 
     private

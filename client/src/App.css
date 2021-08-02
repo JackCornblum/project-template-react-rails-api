@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.mb-3.form-group {
+  padding-left: 25rem;
+  padding-right: 25rem;
+}
+
+#login-button {
+  background-color: #2B395A;
+}
