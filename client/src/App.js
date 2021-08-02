@@ -15,8 +15,7 @@ function App() {
 
   console.log(currentGamer)
   console.log(userGames)
-  // console.log(currentGamer.id)
-  // console.log(userGames)
+ 
 
 
 

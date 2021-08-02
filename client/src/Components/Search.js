@@ -22,8 +22,7 @@ function Search({currentGamer}) {
                 'Accept': 'application/json',
                 'Client-ID': 'yh60ysoy61t6seiqw9zpb3neiv8wm5',
                 'Authorization': 'Bearer u7vaqi4q1fi136cgvx1gxndpqv5jv6',
-                "Access-Control-Allow-Origin": true,
-                "Access-Control-Allow-Headers": true
+                
             }
         })
         .then(res => res.json())
