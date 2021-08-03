@@ -2,12 +2,13 @@ Rails.application.routes.draw do
   
   resources :comments, only: [:index, :show, :create]
   resources :interested_games, only: [:index, :show, :create]
-  resources :games, only: [:index, :show]
+  resources :games, only: [:index, :show, :create, :update]
   resources :gamers, only: [:index, :show, :create]
   # resources :log_in, only: [:create]
   post "/log_in", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   get "/getgames/:id", to: "gamers#get_games"
+  get "/getinterests/:id", to: "gamers#get_interests"
   get "/me", to: "sessions#show"
   get "/search", to: "api_connections#fetcher"
   # Routing logic: fallback requests for React Router.

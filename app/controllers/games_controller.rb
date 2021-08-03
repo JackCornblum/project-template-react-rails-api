@@ -20,10 +20,19 @@ class GamesController < ApplicationController
         end
     end
 
+    def update
+
+        game = Game.find(params[:id])
+        game[:completed] = true
+        game.save
+
+        render json: Game.all
+
+    end
     private
 
     def game_params
-        params.permit(:gamer_id, :name, :image, :genre, :time_played, :completed)
+        params.require(:game).permit(:gamer_id, :name, :image, :genre, :time_played, :completed)
     end
 end
 

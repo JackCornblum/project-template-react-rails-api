@@ -8,10 +8,12 @@ import Login from './Components/Login';
 import MyGames from './Components/MyGames';
 import { Navbar, Container, Nav } from "react-bootstrap"
 import Search from './Components/Search';
+import Signup from './Components/Signup';
 
 function App() {
   const [currentGamer, setCurrentGamer] = useState([])
   const [userGames, setUserGames] = useState([])
+  const [interestedGames, setInterestedGames] = useState([])
 
   console.log(currentGamer)
   console.log(userGames)
@@ -34,7 +36,19 @@ useEffect(() => {
 }, [currentGamer])
 
 
-
+useEffect(() => {
+  if (currentGamer.id) {
+    fetch(`/getinterests/${currentGamer.id}`)
+    .then(res => res.json())
+    .then(data =>{
+      if (data.length > 0){
+        setInterestedGames(data)
+      }
+    })
+  } else {
+    setInterestedGames([])
+  }
+}, [currentGamer])
 
 useEffect(() => {
 fetch(`/me`)
@@ -55,10 +69,13 @@ fetch(`/me`)
           <Login setCurrentGamer={setCurrentGamer} />
         </Route>
         <Route exact path="/mygames">
-          <MyGames userGames={userGames} setUserGames={setUserGames}/>
+          <MyGames userGames={userGames} setUserGames={setUserGames} interestedGames={interestedGames}/>
         </Route>
         <Route exact path="/search">
-          <Search currentGamer={currentGamer}/>
+          <Search setInterestedGames={setInterestedGames} interestedGames={interestedGames} userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer}/>
+        </Route>
+        <Route exact path="/signup">
+          <Signup setCurrentGamer={setCurrentGamer} />
         </Route>
       </Switch>
     </div>

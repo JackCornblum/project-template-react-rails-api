@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom"
 function Login({setCurrentGamer}) {
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
-    const [errors, setErrors] = useState(null)
+    const [errors, setErrors] = useState([])
     const history = useHistory()
 
     async function handleSubmit(e) {
@@ -26,8 +26,12 @@ function Login({setCurrentGamer}) {
             setCurrentGamer(gamerData)
             history.push('/')
         } else {
-            setErrors(gamerData.error)
+            setErrors(gamerData)
         }
+    }
+
+    function handleClick(e) {
+        history.push('/signup')
     }
 
  return (
@@ -42,9 +46,14 @@ function Login({setCurrentGamer}) {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </Form.Group>
-            <Button type="submit" id="login-button">Login</Button>
+           
+            <Button type="submit" className="gameButton">Login</Button>
+            <Form.Label>Or</Form.Label>
+            <Button onClick={handleClick} className="gameButton">Signup</Button>
+            
         </Form>
-            {/* {errors.error?  <Form.Text>{errors.error}</Form.Text> : null} */}
+       
+            {errors.error? errors.error.map(e => <p className="error-message">{e}</p>): null}
      </>
  )
 }

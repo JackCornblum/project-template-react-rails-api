@@ -11,6 +11,7 @@ class InterestedGamesController < ApplicationController
 
     def create
         game = InterestedGame.new(game_params)
+        byebug
 
         if game.save
             render json: game
@@ -22,7 +23,7 @@ class InterestedGamesController < ApplicationController
     private
 
     def game_params
-        params.permit(:gamer_id, :name, :image, :genre)
+        params.require(:interested_game).permit(:gamer_id, :name, :image, :genre)
     end
-end
+
 end

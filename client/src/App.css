@@ -42,6 +42,7 @@
   padding-right: 25rem;
 }
 
-#login-button {
+button.gameButton.btn.btn-primary {
   background-color: #2B395A;
+  border-color: aliceblue;
 }

@@ -4,7 +4,7 @@ import {Button} from "react-bootstrap"
 import SearchedGameCard from "./SearchedGameCard"
 
 
-function Search({currentGamer}) {
+function Search({currentGamer, userGames, setUserGames, interestedGames, setInterestedGames}) {
 
     const [searchedGames, setSearchedGames] = useState("")
     const [resultsArray, setResultsArray] = useState([])
@@ -25,7 +25,7 @@ function Search({currentGamer}) {
 
     let searchCards = resultsArray.map(game => {
         return(
-        <SearchedGameCard image={game.image_id} name={game.name} genre={game.genre_name} currentGamer={currentGamer} /> )}
+        <SearchedGameCard interestedGames={interestedGames} setInterestedGames={setInterestedGames} setUserGames={setUserGames} userGames={userGames} currentGamer={currentGamer} image={game.image_id} name={game.name} genre={game.genre_name} currentGamer={currentGamer} /> )}
     )
 
     return (
@@ -34,7 +34,7 @@ function Search({currentGamer}) {
         <form onSubmit={handleClick}>
             <input type='text' value={searchedGames} onChange={handleChange}/>
             <br/>
-            <Button type='submit'>Submit Search</Button>
+            <Button type='submit' className="gameButton">Submit Search</Button>
         </form>
         
         {searchCards}
