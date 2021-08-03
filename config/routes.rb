@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   get "/getgames/:id", to: "gamers#get_games"
   get "/me", to: "sessions#show"
-  get "/search", to: "gamers#request"
+  get "/search", to: "api_connections#fetcher"
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

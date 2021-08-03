@@ -23,8 +23,7 @@ class GamersController < ApplicationController
         render json: gamer, status: :created
     end
 
-    def request
-       
+    def test
         byebug
     end
 

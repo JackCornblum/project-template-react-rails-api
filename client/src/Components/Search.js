@@ -1,6 +1,7 @@
 
 import { useState } from "react"
 import {Button} from "react-bootstrap"
+import SearchedGameCard from "./SearchedGameCard"
 
 
 function Search({currentGamer}) {
@@ -16,26 +17,27 @@ function Search({currentGamer}) {
 
     function handleClick(e) {
         e.preventDefault()
-        fetch(`/search?term=zelda`)
+        // console.log(searchedGames)
+        fetch(`/search?term=${searchedGames}`)
         .then(res => res.json())
-        .then(console.log)
+        .then(data => setResultsArray(data))
     }
 
-    // let searchCards = searchedGames.map(game => {
-    //     return(
-    //     <SearchedGameCards image={game.image} name={game.name} genre={game.genre} currentGamer={currentGamer} /> )}
-    // )
+    let searchCards = resultsArray.map(game => {
+        return(
+        <SearchedGameCard image={game.image_id} name={game.name} genre={game.genre_name} currentGamer={currentGamer} /> )}
+    )
 
     return (
         <>
         <h3> Search Page </h3>
-        <form onClick={handleClick}>
+        <form onSubmit={handleClick}>
             <input type='text' value={searchedGames} onChange={handleChange}/>
             <br/>
             <Button type='submit'>Submit Search</Button>
         </form>
         
-        {/* {searchCards} */}
+        {searchCards}
         </>
     )
    }
