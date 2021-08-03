@@ -11,7 +11,6 @@ class InterestedGamesController < ApplicationController
 
     def create
         game = InterestedGame.new(game_params)
-        byebug
 
         if game.save
             render json: game

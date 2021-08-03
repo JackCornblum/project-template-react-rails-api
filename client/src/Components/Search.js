@@ -2,6 +2,7 @@
 import { useState } from "react"
 import {Button} from "react-bootstrap"
 import SearchedGameCard from "./SearchedGameCard"
+import { trackPromise } from 'react-promise-tracker'
 
 
 function Search({currentGamer, userGames, setUserGames, interestedGames, setInterestedGames}) {
@@ -11,6 +12,7 @@ function Search({currentGamer, userGames, setUserGames, interestedGames, setInte
 
     function handleChange(e){
         setSearchedGames(e.target.value)
+        setResultsArray([])
     }
 
     // console.log(resultsArray)
@@ -18,9 +20,11 @@ function Search({currentGamer, userGames, setUserGames, interestedGames, setInte
     function handleClick(e) {
         e.preventDefault()
         // console.log(searchedGames)
-        fetch(`/search?term=${searchedGames}`)
-        .then(res => res.json())
-        .then(data => setResultsArray(data))
+        trackPromise(
+            fetch(`/search?term=${searchedGames}`)
+            .then(res => res.json())
+            .then(data => setResultsArray(data))
+        )
     }
 
     let searchCards = resultsArray.map(game => {

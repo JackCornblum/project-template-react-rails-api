@@ -46,3 +46,11 @@ button.gameButton.btn.btn-primary {
   background-color: #2B395A;
   border-color: aliceblue;
 }
+
+#loader {
+  width: 100%;
+  height: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

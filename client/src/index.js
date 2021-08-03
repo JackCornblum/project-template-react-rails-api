@@ -4,11 +4,32 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
+import { usePromiseTracker } from 'react-promise-tracker';
+import Loader from 'react-loader-spinner';
+
+
+const LoadingIndicator = props => {
+
+  const { promiseInProgress } = usePromiseTracker()
+
+  return (
+    promiseInProgress &&
+    <>
+    <div id="loader">
+      <h4>Loading Results</h4>
+    </div>
+      <div id="loader">
+        <Loader type="ThreeDots" color="#2B395A" height="100" width="100" />
+      </div>
+    </>
+  )
+}
 
 
 ReactDOM.render(
   <Router>
     <App />
+    <LoadingIndicator />
   </Router>,
   document.getElementById('root')
 );

@@ -9,6 +9,7 @@ import MyGames from './Components/MyGames';
 import { Navbar, Container, Nav } from "react-bootstrap"
 import Search from './Components/Search';
 import Signup from './Components/Signup';
+import { trackPromise } from 'react-promise-tracker';
 
 function App() {
   const [currentGamer, setCurrentGamer] = useState([])
