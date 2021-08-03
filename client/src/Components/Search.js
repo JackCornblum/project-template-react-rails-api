@@ -16,15 +16,7 @@ function Search({currentGamer}) {
 
     function handleClick(e) {
         e.preventDefault()
-        fetch(`https://api.igdb.com/v4/games/?search=${searchedGames}&fields=id,name,genres,cover`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Client-ID': 'yh60ysoy61t6seiqw9zpb3neiv8wm5',
-                'Authorization': 'Bearer u7vaqi4q1fi136cgvx1gxndpqv5jv6',
-                
-            }
-        })
+        fetch(`/search?term=zelda`)
         .then(res => res.json())
         .then(console.log)
     }

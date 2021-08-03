@@ -7,6 +7,7 @@ class GamersController < ApplicationController
     end
 
     def show
+        byebug
         gamer = Gamer.find(params[:id])
         render json: gamer
     end
@@ -20,6 +21,11 @@ class GamersController < ApplicationController
         gamer = Gamer.create!(gamer_params)
         session[:gamer_id] = gamer.id
         render json: gamer, status: :created
+    end
+
+    def request
+       
+        byebug
     end
 
     private

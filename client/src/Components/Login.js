@@ -44,9 +44,7 @@ function Login({setCurrentGamer}) {
             </Form.Group>
             <Button type="submit" id="login-button">Login</Button>
         </Form>
-            {errors? errors.map(e => {
-                return <Form.Text>{e}</Form.Text>
-            }) : null}
+            {/* {errors.error?  <Form.Text>{errors.error}</Form.Text> : null} */}
      </>
  )
 }
