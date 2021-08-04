@@ -81,7 +81,7 @@ fetch(`/me`)
           <Deals setGameDeals={setGameDeals} gameDeals={gameDeals} />
         </Route>
         <Route exact path="/">
-          <Home />
+          <Home currentGamer={currentGamer} />
         </Route>
       </Switch>
     </div>

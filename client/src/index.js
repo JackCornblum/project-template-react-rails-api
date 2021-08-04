@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
+import "react-multi-carousel/lib/styles.css";
 import { usePromiseTracker } from 'react-promise-tracker';
 import Loader from 'react-loader-spinner';
 

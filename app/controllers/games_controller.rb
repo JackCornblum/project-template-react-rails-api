@@ -50,6 +50,11 @@ class GamesController < ApplicationController
         render json: content
     end
 
+    def gamesplayed
+        games = Game.all.sample(5)
+        render json: games
+    end
+
     private
 
     def game_params
