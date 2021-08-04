@@ -14,14 +14,14 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
         .then(res => res.json())
         .then(data => { 
             if (data.length > 0) {
-                setComments(data[0].comment)
+                setComments(data)
             }
         }
             )
         
     }, [])
 
-  
+//setComments(data.map( obj => obj.comment)
 
     function handleClick (e) {
         fetch(`/games/${id}`, {
@@ -74,14 +74,16 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
     async function showDeals(e) {
         // console.log('hello?')
         const searchTerm = name.replace(/ /g, "")
-        const newSearchTerm = searchTerm.replace(/[,.-:]/g, '')
+        let newSearchTerm = searchTerm.replace(/[,.-:&]/g, '')
+        newSearchTerm = newSearchTerm.toUpperCase()
         const res = await fetch(`https://cheapshark-game-deals.p.rapidapi.com/games?title=${newSearchTerm}`, {
             method: 'GET',
             headers: {'x-rapidapi-key': 'fbf5db35d2mshbfc05e0f00a9ee9p1751a4jsn1b64307f1581', 'x-rapidapi-host': 'cheapshark-game-deals.p.rapidapi.com', 'Content-Type': 'application/json'}
         })
         const deals = await res.json()
-        console.log(deals)
-        setGameDeals(deals)
+        const matchingDeal = deals.filter(d => d.internalName === newSearchTerm)
+        console.log(matchingDeal)
+        setGameDeals(matchingDeal)
         history.push('/deals')
     }
     
@@ -103,7 +105,6 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
 
     function commentSubmit(e) {
         e.preventDefault()
-        console.log(id)
         let comment = {
             gamer_id: currentGamer.id,
             game_id: id,
@@ -118,39 +119,67 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
             
         })
         .then(res => res.json())
-        .then(console.log)
+        .then(data => setComments([...comments, data]))
+     
     }
 
+    function deleteComment(e) {
+        // console.log(e.target.parentElement.id)
+        fetch(`/comments/${e.target.parentElement.id}`, {
+            method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+        let filtered = comments.filter(item => item.id !== data.id)
+        setComments(filtered)
+    })}
+    //      setComments(comments.map( item => {
+    //     if (item.id != data.id)
+    //     return item
+    // })))}
+    
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card style={{ width: '35rem', maxHeight: '300px' ,overflowY: "auto", marginBottom: '25px' }}>
             
             <Card.Body>
             <Card.Title> {name} </Card.Title> 
             <Card.Img variant="top" src={image} style={{height: "200px", width: "200px", margin: "auto"}}/> 
-                <Card.Subtitle> Game Genre: {genre} </Card.Subtitle>
-                <Card.Text> Time Played: {timePlayed} hours </Card.Text>
+            <Card.Subtitle> Game Genre: {genre} </Card.Subtitle>
+                
+                {(inProgress === true || completed === true )? <Card.Text> Time Played: {timePlayed} hours </Card.Text> 
+                : null}
+
                 {(inProgress === true || completed === true )? 
-                <>
                 <form onSubmit={updateTimePlayed}>
                 <input name="input" type="number" step="0.01"></input>
                 <Button type="submit" className="gameButton" >Update Time Played</Button>
                 </form> 
-                </>
                 : null}
-                <Card.Text> Completed: {completed ? 'Yes' : 'No'} </Card.Text> 
+                
+                {(inProgress === true || completed === true )? <Card.Text> Completed: {completed ? 'Yes' : 'No'} </Card.Text> : null }
                 {inProgress ? <Button onClick={handleClick} className="gameButton">I've Completed This Game</Button> : null}
                 {interestedIn ? <Button onClick={handleInProgress} className="gameButton">I'm Playing This Game Now</Button> : null }
                 {interestedIn ?  <Button onClick={showDeals} className="gameButton">Find Deals</Button> : null }
-               
-
-                {(inProgress === true || completed === true )? 
                 
+                {(inProgress === true || completed === true )? 
                 <form onSubmit={commentSubmit}>
                 <input name="comment" type="textarea" ></input>
                 <Button type="submit" className="gameButton" >Comment</Button>
                 </form> 
                 : null}
-                <Card.Text> Comments: {comments} </Card.Text> 
+                {(inProgress === true || completed === true )? 
+                    <>
+                        <Card.Text> Comments: </Card.Text>
+                        <ul>
+                            {comments.map(item => {
+                        return <li id={item.id} key={item.id}>
+                            {item.comment}
+                        <Button variant="secondary" size="sm" onClick={deleteComment}>X</Button>
+                        </li>}
+                            )}
+                        </ul> 
+                    </>
+                : null }
             </Card.Body>
         </Card>
     )

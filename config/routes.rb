@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :comments, only: [:index, :show, :create]
+  resources :comments, only: [:index, :show, :create, :destroy]
   resources :interested_games, only: [:index, :show, :create, :destroy]
   resources :games, only: [:index, :show, :create, :update]
   resources :gamers, only: [:index, :show, :create]

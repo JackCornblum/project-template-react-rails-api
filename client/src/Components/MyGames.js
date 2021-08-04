@@ -9,7 +9,7 @@ function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInt
     
     let interestedGameCards = interestedGames.map(game => {
             return(
-                <Col key={game.name} xs={6} md={4}>
+                <Col key={game.name} xs={6} md={6}>
                 <GameCard gameDeals={gameDeals} setGameDeals={setGameDeals} interestedGames={interestedGames} setInterestedGames={setInterestedGames} userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer} id={game.id} image={game.image} name={game.name} genre={game.genre} completed={game.completed} interestedIn={true}/>
                 </Col> 
             )}
@@ -18,7 +18,7 @@ function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInt
 
     let inProgressGameCards = userGames.map(game => { if (!game.completed) {
         return(
-            <Col key={game.name} xs={6} md={4}>
+            <Col key={game.name} xs={6} md={6}>
             <GameCard inProgress={true} userGames={userGames} currentGamer={currentGamer} setUserGames={setUserGames} image={game.image} name={game.name} genre={game.genre} timePlayed={game.time_played} id={game.id} completed={game.completed}/>
             </Col> 
         )}}
@@ -26,7 +26,7 @@ function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInt
 
     let completedGameCards = userGames.map(game => { if (game.completed) {
         return(
-            <Col key={game.name} xs={6} md={4}>
+            <Col key={game.name} xs={6} md={6}>
             <GameCard userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer} id={game.id} completed={true} image={game.image} name={game.name} genre={game.genre} completed={game.completed} timePlayed={game.time_played} />
             </Col> 
         )}}
@@ -54,7 +54,7 @@ function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInt
 
         <h2>My Completed Games</h2>
             <Container fluid="md">
-                <Row md={4}>
+                <Row md={6}>
                     {completedGameCards}
                 </Row>
             </Container>

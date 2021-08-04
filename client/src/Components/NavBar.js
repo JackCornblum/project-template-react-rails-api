@@ -5,7 +5,7 @@ import { Navbar, Container, Nav } from "react-bootstrap"
 
 function NavBar({currentGamer, setCurrentGamer}) {
     // const history = useHistory()
-    console.log(currentGamer)
+    // console.log(currentGamer)
 
     async function handleLogout(e) {
         const res = await fetch('/logout', {

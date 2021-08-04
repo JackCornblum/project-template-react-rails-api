@@ -11,17 +11,14 @@ import Search from './Components/Search';
 import Signup from './Components/Signup';
 import { trackPromise } from 'react-promise-tracker';
 import Deals from './Components/Deals';
+import Home from './Components/Home';
+
 
 function App() {
   const [currentGamer, setCurrentGamer] = useState([])
   const [userGames, setUserGames] = useState([])
   const [interestedGames, setInterestedGames] = useState([])
   const [gameDeals, setGameDeals] = useState([])
-
-  console.log(currentGamer)
-  console.log(userGames)
- 
-
 
 
 useEffect(() => {
@@ -82,6 +79,9 @@ fetch(`/me`)
         </Route>
         <Route exact path="/deals">
           <Deals setGameDeals={setGameDeals} gameDeals={gameDeals} />
+        </Route>
+        <Route exact path="/">
+          <Home />
         </Route>
       </Switch>
     </div>
