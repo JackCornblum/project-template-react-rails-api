@@ -10,23 +10,26 @@ function MyGames({userGames, interestedGames, setUserGames}) {
     let interestedGameCards = interestedGames.map(game => {
             return(
                 <Col key={game.name} xs={6} md={4}>
-            <GameCard image={game.image} name={game.name} genre={game.genre} completed={game.completed}/>
-            </Col> )}
+                <GameCard image={game.image} name={game.name} genre={game.genre} completed={game.completed}/>
+                </Col> 
+            )}
         )
 
 
     let inProgressGameCards = userGames.map(game => { if (!game.completed) {
         return(
             <Col key={game.name} xs={6} md={4}>
-        <GameCard userGames={userGames} setUserGames={setUserGames} image={game.image} name={game.name} genre={game.genre} timePlayed={game.timePlayed} id={game.id} completed={game.completed}/>
-        </Col> )}}
+            <GameCard userGames={userGames} setUserGames={setUserGames} image={game.image} name={game.name} genre={game.genre} timePlayed={game.timePlayed} id={game.id} completed={game.completed}/>
+            </Col> 
+        )}}
     )
 
     let completedGameCards = userGames.map(game => { if (game.completed) {
         return(
             <Col key={game.name} xs={6} md={4}>
-        <GameCard image={game.image} name={game.name} genre={game.genre} completed={game.completed} timePlayed={game.timePlayed} />
-        </Col> )}}
+            <GameCard image={game.image} name={game.name} genre={game.genre} completed={game.completed} timePlayed={game.timePlayed} />
+            </Col> 
+        )}}
     )
 
 

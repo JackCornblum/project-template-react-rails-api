@@ -26,7 +26,10 @@ class GamesController < ApplicationController
         game[:completed] = true
         game.save
 
-        render json: Game.all
+        gamer = Gamer.find(game[:gamer_id])
+        games = gamer.games
+
+        render json: games
 
     end
     private
