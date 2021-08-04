@@ -4,13 +4,13 @@ import Col from 'react-bootstrap/Col'
 
 
 
-function MyGames({userGames, interestedGames, setUserGames}) {
+function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInterestedGames, setGameDeals, gameDeals}) {
 
     
     let interestedGameCards = interestedGames.map(game => {
             return(
                 <Col key={game.name} xs={6} md={4}>
-                <GameCard image={game.image} name={game.name} genre={game.genre} completed={game.completed}/>
+                <GameCard gameDeals={gameDeals} setGameDeals={setGameDeals} interestedGames={interestedGames} setInterestedGames={setInterestedGames} userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer} id={game.id} image={game.image} name={game.name} genre={game.genre} completed={game.completed} interestedIn={true}/>
                 </Col> 
             )}
         )
@@ -19,7 +19,7 @@ function MyGames({userGames, interestedGames, setUserGames}) {
     let inProgressGameCards = userGames.map(game => { if (!game.completed) {
         return(
             <Col key={game.name} xs={6} md={4}>
-            <GameCard userGames={userGames} setUserGames={setUserGames} image={game.image} name={game.name} genre={game.genre} timePlayed={game.timePlayed} id={game.id} completed={game.completed}/>
+            <GameCard inProgress={true} userGames={userGames} currentGamer={currentGamer} setUserGames={setUserGames} image={game.image} name={game.name} genre={game.genre} timePlayed={game.time_played} id={game.id} completed={game.completed}/>
             </Col> 
         )}}
     )
@@ -27,7 +27,7 @@ function MyGames({userGames, interestedGames, setUserGames}) {
     let completedGameCards = userGames.map(game => { if (game.completed) {
         return(
             <Col key={game.name} xs={6} md={4}>
-            <GameCard image={game.image} name={game.name} genre={game.genre} completed={game.completed} timePlayed={game.timePlayed} />
+            <GameCard userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer} id={game.id} completed={true} image={game.image} name={game.name} genre={game.genre} completed={game.completed} timePlayed={game.time_played} />
             </Col> 
         )}}
     )

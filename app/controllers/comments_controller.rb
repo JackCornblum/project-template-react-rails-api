@@ -6,8 +6,9 @@ class CommentsController < ApplicationController
     end
 
     def show
-        comment = Comment.find(params[:id])
-        render json: comment
+        comment_obj = Comment.find_by(game_id: params[:id])
+        content = comment_obj[:comment]
+        render json: content
     end
 
     def create

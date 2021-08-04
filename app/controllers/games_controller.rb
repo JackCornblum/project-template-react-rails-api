@@ -32,10 +32,34 @@ class GamesController < ApplicationController
         render json: games
 
     end
+
+    def update_time_played
+        game = Game.find(params[:id])
+        game[:time_played] = params[:time_played]
+        game.save
+
+        gamer = Gamer.find(game[:gamer_id])
+        games = gamer.games
+        
+        render json: games
+    end
+
+    def get_comments
+        game = Game.find(params[:id])
+        content = game.comments
+        render json: content
+    end
+
     private
 
     def game_params
+        # byebug
         params.require(:game).permit(:gamer_id, :name, :image, :genre, :time_played, :completed)
+    end
+
+    def form_params
+        # byebug
+        params.permit(:time_played)
     end
 end
 

@@ -19,6 +19,15 @@ class InterestedGamesController < ApplicationController
         end
     end
 
+    def destroy
+        game = InterestedGame.find(params[:id])
+        gamer = game.gamer
+        game.destroy
+        games = gamer.interested_games
+
+        render json: games
+    end
+
     private
 
     def game_params

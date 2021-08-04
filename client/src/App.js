@@ -10,11 +10,13 @@ import { Navbar, Container, Nav } from "react-bootstrap"
 import Search from './Components/Search';
 import Signup from './Components/Signup';
 import { trackPromise } from 'react-promise-tracker';
+import Deals from './Components/Deals';
 
 function App() {
   const [currentGamer, setCurrentGamer] = useState([])
   const [userGames, setUserGames] = useState([])
   const [interestedGames, setInterestedGames] = useState([])
+  const [gameDeals, setGameDeals] = useState([])
 
   console.log(currentGamer)
   console.log(userGames)
@@ -70,13 +72,16 @@ fetch(`/me`)
           <Login setCurrentGamer={setCurrentGamer} />
         </Route>
         <Route exact path="/mygames">
-          <MyGames userGames={userGames} setUserGames={setUserGames} interestedGames={interestedGames}/>
+          <MyGames setGameDeals={setGameDeals} gameDeals={gameDeals} setInterestedGames={setInterestedGames} userGames={userGames} setUserGames={setUserGames} interestedGames={interestedGames} currentGamer={currentGamer}/>
         </Route>
         <Route exact path="/search">
           <Search setInterestedGames={setInterestedGames} interestedGames={interestedGames} userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer}/>
         </Route>
         <Route exact path="/signup">
           <Signup setCurrentGamer={setCurrentGamer} />
+        </Route>
+        <Route exact path="/deals">
+          <Deals setGameDeals={setGameDeals} gameDeals={gameDeals} />
         </Route>
       </Switch>
     </div>

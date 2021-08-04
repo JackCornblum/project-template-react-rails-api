@@ -58,10 +58,9 @@ function SearchedGameCard({name, image, genre, currentGamer, userGames, setUserG
     return (
             <Card>
                 <Card.Body>
-                    <h3> Game Card  </h3>
-                    <h2> {name} </h2> 
-                    <img style={{width:"200px", height:"200px"}} src={imgSrc}/>
-                    <h3> {genre} </h3>
+                <Card.Title> {name} </Card.Title> 
+                <Card.Img variant="top" src={imgSrc} style={{height: "200px", width: "200px", margin: "auto"}}/>
+                    <Card.Subtitle> Game Genre: {genre} </Card.Subtitle>
                     {currentGamer.id? <Button onClick={handleClick} className="gameButton">Add to My Games</Button> : null}
                     {currentGamer.id? <Button onClick={handleClick} className="gameButton">Add to Interested In Games</Button> : null}
                 </Card.Body>
