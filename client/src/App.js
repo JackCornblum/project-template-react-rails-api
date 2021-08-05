@@ -59,7 +59,7 @@ fetch(`/me`)
   } 
 })
 }, [])
-
+console.log(userGames)
   return (
     <div className="App">
       <NavBar currentGamer={currentGamer}/>

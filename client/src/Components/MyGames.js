@@ -9,6 +9,19 @@ function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInt
     const[interested, setInterested] = useState(false)
     const [inProgress, setInProgress] = useState(false)
     const [completed, setCompleted] = useState(false)
+    const [completeSortedByTime, setCompleteSortedByTime] = useState([])
+
+    useEffect(() => {
+
+        let sortedCompleteCards = userGames.sort((a,b) => {
+            if(a.time_played > b.time_played)
+            {return -1}
+    
+        })
+
+        setCompleteSortedByTime(sortedCompleteCards)
+
+    },[userGames])
 
     let interestedGameCards = interestedGames.map(game => {
             return(
@@ -30,10 +43,29 @@ function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInt
     let completedGameCards = userGames.map(game => { if (game.completed) {
         return(
             <Col key={game.name} xs={6} md={6}>
-            <GameCard userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer} id={game.id} completed={true} image={game.image} name={game.name} genre={game.genre} completed={game.completed} timePlayed={game.time_played} />
+            <GameCard rating={game.rating} userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer} id={game.id} completed={true} image={game.image} name={game.name} genre={game.genre} completed={game.completed} timePlayed={game.time_played} />
             </Col> 
         )}}
     )
+
+    // let sortedCompleteCards = userGames.sort((a,b) => {
+    //     if(a.time_played > b.time_played)
+    //     {return -1}
+
+    // })
+
+    const renderByTimePlayed = completeSortedByTime.map(game => {
+        if (game.completed) {
+            return(
+                <Col key={game.name} xs={6} md={6}>
+                    <GameCard userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer} id={game.id} completed={true} image={game.image} name={game.name} genre={game.genre} completed={game.completed} timePlayed={game.time_played} />
+                </Col> 
+            )
+        }
+    })
+
+    // // console.log(userGames)
+    // console.log(sortedCompleteCards)
 
     let renderInterested = (
         <>

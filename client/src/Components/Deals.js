@@ -1,5 +1,6 @@
 import {Card, Button, Container, Row, Accordion} from 'react-bootstrap'
 import {useState, useEffect} from 'react'
+import { trackPromise } from 'react-promise-tracker'
 
 function Deals({gameDeals}) {
     const [gameDealsArray, setGameDealsArray] = useState([])
@@ -12,7 +13,7 @@ function Deals({gameDeals}) {
     useEffect(() => {
         if (gameDeals[0]) {
             const gameId = gameDeals[0].gameID
-
+            trackPromise(
             fetch(`https://cheapshark-game-deals.p.rapidapi.com/games?id=${gameId}`, {
                 method: 'GET',
                 headers: {
@@ -36,6 +37,7 @@ function Deals({gameDeals}) {
                 .then(data => setStores(data))
                 
             })
+            )
         }
         
 

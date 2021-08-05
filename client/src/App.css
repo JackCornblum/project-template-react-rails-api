@@ -1,6 +1,6 @@
 nav.color-nav.navbar.navbar-expand.navbar-dark {
   background-color: #212121;
-  height: 5rem;
+  height: 6rem;
 }
 
 .card-header {
@@ -17,7 +17,11 @@ a.mr-auto.navbar-brand {
 }
 
 .game-card.card {
+  margin-top: 4%;
   border: solid #0D7377;
+  margin-left: 1%;
+  margin-right: 1%;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.637);
 }
 
 .game-card.card::-webkit-scrollbar {
@@ -54,6 +58,7 @@ p.card-text {
 
 h2 {
   color: #14FFEC;
+  text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.637);
 }
 
 .card-body {
@@ -65,7 +70,7 @@ h2 {
 }
 
 a.color-links.nav-link {
-  color: #EEEEEE;
+  font-size: large;
 }
 
 .App {
@@ -149,6 +154,23 @@ button.gameButton.btn.btn-primary:hover {
   margin-bottom: 1%;
   font-family: Goldman;
   color: #14FFEC;
+}
+
+.carousel-div {
+  margin-top: 2%;
+  margin-left:5rem;
+  margin-right: 5rem;
+  border: 5px solid #14FFEC;
+  border-radius: 3px;
+  box-shadow: 18px 18px 10px rgba(0, 0, 0, 0.637);
+}
+
+h3.color-header {
+  text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.637);
+}
+
+h4.color-header {
+  text-shadow: 10px 10px 10px rgba(0, 0, 0, 0.637);
 }
 
 

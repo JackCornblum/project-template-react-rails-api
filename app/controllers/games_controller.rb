@@ -55,11 +55,29 @@ class GamesController < ApplicationController
         render json: games
     end
 
+    def update_rating
+        game = Game.find(params[:id])
+        game[:rating] = params[:rating]
+        game.save
+
+        gamer = Gamer.find(game[:gamer_id])
+        games = gamer.games
+        
+        render json: games
+    end
+
+    def destroy
+        game = Game.find(params[:id])
+        game.destroy
+
+        render json: game
+    end
+
     private
 
     def game_params
         # byebug
-        params.require(:game).permit(:gamer_id, :name, :image, :genre, :time_played, :completed)
+        params.require(:game).permit(:gamer_id, :name, :image, :genre, :time_played, :completed, :rating)
     end
 
     def form_params

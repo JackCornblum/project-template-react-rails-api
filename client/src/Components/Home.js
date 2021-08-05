@@ -30,7 +30,7 @@ function Home({currentGamer}) {
         },
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 3
+          items: 2
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
@@ -63,9 +63,11 @@ function Home({currentGamer}) {
         }
 
         <h4 className="color-header">Games other users are playing</h4>
-        <Carousel responsive={responsive}>
-            {renderGames}
-        </Carousel>
+        <div className="carousel-div">
+          <Carousel style={{marginLeft: '5%'}} infinite="true" centerMode="true" autoPlay="true" draggable="true" responsive={responsive}>
+              {renderGames}
+          </Carousel>
+        </div>
 
         {/* <Accordion defaultActiveKey="0">
                             <Accordion.Item eventKey="1">

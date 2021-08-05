@@ -14,7 +14,8 @@ function SearchedGameCard({name, image, genre, currentGamer, userGames, setUserG
             name, 
             genre,
             time_played: 0,
-            completed: false
+            completed: false,
+            rating: 0
         }
         const interestedObj = {
             gamer_id: currentGamer.id,
@@ -56,7 +57,7 @@ function SearchedGameCard({name, image, genre, currentGamer, userGames, setUserG
     
     
     return (
-            <Card>
+            <Card className='game-card'>
                 <Card.Body>
                 <Card.Title> {name} </Card.Title> 
                 <Card.Img variant="top" src={imgSrc} style={{height: "200px", width: "200px", margin: "auto"}}/>

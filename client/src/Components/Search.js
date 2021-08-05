@@ -1,6 +1,6 @@
 
 import { useState } from "react"
-import {Button} from "react-bootstrap"
+import {Button, Form} from "react-bootstrap"
 import SearchedGameCard from "./SearchedGameCard"
 import { trackPromise } from 'react-promise-tracker'
 import Col from 'react-bootstrap/Col'
@@ -48,11 +48,11 @@ function Search({currentGamer, userGames, setUserGames, interestedGames, setInte
     return (
         <>
         <h3 className="color-header"> Search Page </h3>
-        <form onSubmit={handleClick}>
+        <Form onSubmit={handleClick} style={{fontFamily: 'Goldman', color: '#14FFEC' }}>
             <input type='text' value={searchedGames} onChange={handleChange}/>
             <br/>
             <Button type='submit' className="gameButton">Submit Search</Button>
-        </form>
+        </Form>
         
        
         <Container fluid="md">

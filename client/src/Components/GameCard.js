@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import {useHistory} from 'react-router-dom'
 import Accordion from 'react-bootstrap/Accordion'
 
-function GameCard({interestedGames, setInterestedGames, name, image, genre, timePlayed, completed, id, userGames, setUserGames, interestedIn, inProgress, currentGamer,  gameDeals, setGameDeals}) {
+function GameCard({rating, interestedGames, setInterestedGames, name, image, genre, timePlayed, completed, id, userGames, setUserGames, interestedIn, inProgress, currentGamer,  gameDeals, setGameDeals}) {
 
     const history = useHistory()
     const [comments, setComments] = useState([])
@@ -89,7 +89,6 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
     
     function updateTimePlayed(e){
         e.preventDefault()
-        console.log(e.target.input.value)
         fetch(`/updatetimeplayed/${id}`, {
             method: 'PATCH',
             headers: {
@@ -142,7 +141,48 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
     //     if (item.id != data.id)
     //     return item
     // })))}
+
+    function addRating(e) {
+        e.preventDefault()
+        console.log(e.target.rating.value)
+        fetch(`/updaterating/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify({"rating": e.target.rating.value})
+            
+        }).then(res => res.json())
+        .then(data => {
+            setUserGames(data)
+            e.target.reset()
+            console.log(data)
+        })
+    }
+
+    function handleRemove(e) {
+    fetch(`/games/${e.target.id}`, {
+            method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+        let filtered = userGames.filter(item => item.id !== data.id)
+        setUserGames(filtered)
+    })}
+
+    function handleRemoveInterested(e) {
+        console.log(e.target.id)
+        fetch(`/destroyer/${e.target.id}`, {
+            method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+        let filtered = interestedGames.filter(item => item.id !== data.id)
+        setInterestedGames(filtered)
+    })}
+
     
+   
     return (
         <Card className="game-card" style={{ width: '35rem', maxHeight: '400px' ,overflowY: "scroll", marginBottom: '25px', fontFamily: 'Goldman', color: '#14FFEC' }}>
             
@@ -150,7 +190,8 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
             <Card.Title> {name} </Card.Title> 
             <Card.Img variant="top" src={image} style={{height: "200px", width: "200px", margin: "auto"}}/> 
             <Card.Subtitle> Game Genre: {genre} </Card.Subtitle>
-                
+            
+            
                 {(inProgress === true || completed === true )? <Card.Text> Time Played: {timePlayed} hours </Card.Text> 
                 : null}
 
@@ -172,7 +213,7 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
                 : null}
                 
                
-                {interestedIn ? <Button onClick={handleInProgress} className="gameButton">I'm Playing This Game Now</Button> : null }
+                {interestedIn ? <> <Button onClick={handleInProgress} className="gameButton">I'm Playing This Game Now</Button><br/> </> : null }
                 {interestedIn ?  <Button onClick={showDeals} className="gameButton">Find Deals</Button> : null }
                 
                 {(inProgress === true || completed === true )? 
@@ -234,12 +275,36 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
                  </Accordion>
 
          : null }
+                {(completed === true )? 
+            <>
                 
-            {(inProgress === true || completed === true )? <>
+                <Accordion>
+                <Accordion.Toggle as={Card.Header} eventKey="0">
+                    { rating? <p>Click to Update Rating </p> : <p>Click To Add Rating </p> }
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                <form onSubmit={addRating}>
+                <input name="rating" type="number" step="0.1"></input>
+                <br/>
+                <Button type="submit" className="gameButton" >Add Rating</Button>
+                </form> 
+
+                </Accordion.Collapse>
+                    </Accordion>
+                    {rating ? <p> My Rating: {rating} Stars</p> :null}
+            </>
+                    : null }
+            {/* {(inProgress === true)? <>
             <h2> . . .</h2>
             <Card.Text> Am I done playing this one? {completed ? 'Yes' : 'No'} </Card.Text>
-            </> : null }
-            {inProgress ? <Button onClick={handleClick} className="gameButton">I've Finished Playing This Game</Button> : null}
+            </> : null } */}
+            {inProgress ? <>
+                <h2> . . .</h2>
+             <Button onClick={handleClick} className="gameButton">I've Finished Playing This Game</Button>
+             </> : null}
+
+             {(inProgress === true || completed === true )? <Button id={id} onClick={handleRemove} style={{marginLeft: '430px'}} variant="secondary" >Remove </Button> :
+             <Button id={id} onClick={handleRemoveInterested} style={{marginLeft: '430px'}} variant="secondary" >Remove </Button> }
             </Card.Body>
         </Card>
     )
