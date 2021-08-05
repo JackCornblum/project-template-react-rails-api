@@ -47,7 +47,7 @@ function Search({currentGamer, userGames, setUserGames, interestedGames, setInte
 
     return (
         <>
-        <h3> Search Page </h3>
+        <h3 className="color-header"> Search Page </h3>
         <form onSubmit={handleClick}>
             <input type='text' value={searchedGames} onChange={handleChange}/>
             <br/>
@@ -59,7 +59,7 @@ function Search({currentGamer, userGames, setUserGames, interestedGames, setInte
                 <Row md={4}>
                 {searchCards}
                 </Row>
-                {errors ? <h3>{errors}</h3> : null}
+                {errors ? <h3 style={{fontFamily: 'Goldman', color: '#14FFEC' }}>{errors}</h3> : null}
             </Container>
         </>
     )

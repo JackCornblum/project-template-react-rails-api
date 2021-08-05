@@ -36,8 +36,8 @@ function Login({setCurrentGamer}) {
 
  return (
      <>
-        <h3> Login </h3>
-        <Form onSubmit={handleSubmit}>
+        <h3 style={{fontFamily: 'Goldman', color: '#14FFEC' }}> Login </h3>
+        <Form onSubmit={handleSubmit} style={{fontFamily: 'Goldman', color: '#14FFEC' }}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter your email address" value={email} onChange={(e) => {
@@ -59,7 +59,7 @@ function Login({setCurrentGamer}) {
             
         </Form>
        
-            {errors.error? errors.error.map(e => <p className="error-message">{e}</p>): null}
+            {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Goldman', color: '#14FFEC' }}>{e}</p>): null}
      </>
  )
 }

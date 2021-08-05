@@ -18,15 +18,15 @@ function NavBar({currentGamer, setCurrentGamer}) {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark">
-                <Container>
-                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-                    {currentGamer.id? <Navbar.Brand>{currentGamer.name}</Navbar.Brand> : null}
+            <Navbar className="color-nav" variant="dark">
+                <Container className="nav-container">
+                    <Navbar.Brand className="mr-auto" style={{fontFamily:'Goldman'}} href="/">Flatiron Steamclone</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
+                    {currentGamer.id? <Navbar.Brand>{currentGamer.name}</Navbar.Brand> : null}
+                        <Nav.Link className="color-links" href="/">Home</Nav.Link>
                         {currentGamer.id? <Nav.Link href="/mygames">My Games</Nav.Link> : null}
-                        <Nav.Link href="/search">Search Games</Nav.Link>
-                        {currentGamer.id?<Nav.Link href="/login" onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
+                        <Nav.Link className="color-links" href="/search">Search Games</Nav.Link>
+                        {currentGamer.id?<Nav.Link className="color-links" href="/login" onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link className="color-links" href="/login">Login</Nav.Link>}
                         
                     </Nav>
                 </Container>

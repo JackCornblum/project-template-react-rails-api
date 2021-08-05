@@ -3,12 +3,12 @@ import Button from 'react-bootstrap/Button'
 import Popup from 'reactjs-popup'
 import { useEffect, useState } from "react"
 import {useHistory} from 'react-router-dom'
+import Accordion from 'react-bootstrap/Accordion'
 
 function GameCard({interestedGames, setInterestedGames, name, image, genre, timePlayed, completed, id, userGames, setUserGames, interestedIn, inProgress, currentGamer,  gameDeals, setGameDeals}) {
 
     const history = useHistory()
     const [comments, setComments] = useState([])
-
     useEffect(() => {
         fetch(`/gamecomments/${id}`)
         .then(res => res.json())
@@ -98,7 +98,10 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
             body: JSON.stringify({"time_played": e.target.input.value})
             
         }).then(res => res.json())
-        .then(data => setUserGames(data))
+        .then(data => {
+            setUserGames(data)
+            e.target.reset()
+        })
         // .then(res => res.json())
         // .then(data => setUserGames([...userGames, data]))
     }
@@ -119,7 +122,9 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
             
         })
         .then(res => res.json())
-        .then(data => setComments([...comments, data]))
+        .then(data => {
+            setComments([...comments, data])
+            e.target.reset()})
      
     }
 
@@ -139,7 +144,7 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
     // })))}
     
     return (
-        <Card style={{ width: '35rem', maxHeight: '300px' ,overflowY: "auto", marginBottom: '25px' }}>
+        <Card className="game-card" style={{ width: '35rem', maxHeight: '400px' ,overflowY: "scroll", marginBottom: '25px', fontFamily: 'Goldman', color: '#14FFEC' }}>
             
             <Card.Body>
             <Card.Title> {name} </Card.Title> 
@@ -150,36 +155,91 @@ function GameCard({interestedGames, setInterestedGames, name, image, genre, time
                 : null}
 
                 {(inProgress === true || completed === true )? 
+
+                <Accordion>
+                <Accordion.Toggle as={Card.Header} eventKey="0">
+                    Click To Update Time Played
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+
                 <form onSubmit={updateTimePlayed}>
-                <input name="input" type="number" step="0.01"></input>
+                <input name="input" type="number" step="0.1"></input>
+                <br/>
                 <Button type="submit" className="gameButton" >Update Time Played</Button>
                 </form> 
+                </Accordion.Collapse>
+                        </Accordion>
                 : null}
                 
-                {(inProgress === true || completed === true )? <Card.Text> Completed: {completed ? 'Yes' : 'No'} </Card.Text> : null }
-                {inProgress ? <Button onClick={handleClick} className="gameButton">I've Completed This Game</Button> : null}
+               
                 {interestedIn ? <Button onClick={handleInProgress} className="gameButton">I'm Playing This Game Now</Button> : null }
                 {interestedIn ?  <Button onClick={showDeals} className="gameButton">Find Deals</Button> : null }
                 
                 {(inProgress === true || completed === true )? 
+
+                    <Accordion>
+                    <Accordion.Toggle as={Card.Header} eventKey="0">
+                        Click To Leave Review
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey="0">
                 <form onSubmit={commentSubmit}>
-                <input name="comment" type="textarea" ></input>
-                <Button type="submit" className="gameButton" >Comment</Button>
+                    <br/>
+                <textarea name="comment" type="textarea" rows='3' cols='50'></textarea>
+                <br/>
+                <Button type="submit" className="gameButton" >Leave Review</Button>
                 </form> 
+
+                </Accordion.Collapse>
+                        </Accordion>
                 : null}
-                {(inProgress === true || completed === true )? 
-                    <>
-                        <Card.Text> Comments: </Card.Text>
-                        <ul>
-                            {comments.map(item => {
-                        return <li id={item.id} key={item.id}>
-                            {item.comment}
-                        <Button variant="secondary" size="sm" onClick={deleteComment}>X</Button>
-                        </li>}
-                            )}
-                        </ul> 
-                    </>
+                {(inProgress === true && comments.length > 0)? 
+                 
+                    
+                        <Accordion>
+                            <Accordion.Toggle as={Card.Header} eventKey="0">
+                                Click To See My Reviews
+                            </Accordion.Toggle>
+                            <Accordion.Collapse eventKey="0">
+                                <ul style={{listStyle: 'none', paddingLeft: '0px', color: '#14FFEC'}}>
+                                {comments.map(item => {
+                                return <li style={{listStyle: 'none', border: '1px solid', margin: '5px'}} id={item.id} key={item.id}>
+                                {item.comment}
+                                <br/>
+                                <Button style={{marginBottom: '10px'}} variant='secondary' size="sm" onClick={deleteComment}>Remove Review</Button>
+                                </li>}
+                                )}
+                                </ul> 
+                            </Accordion.Collapse>
+                        </Accordion>
+   
                 : null }
+                  {(completed === true && comments.length > 0)? 
+                 
+                    
+                 <Accordion>
+                     <Accordion.Toggle as={Card.Header} eventKey="0">
+                         Click To See My Reviews
+                     </Accordion.Toggle>
+                     <Accordion.Collapse eventKey="0">
+                         <ul style={{listStyle: 'none', paddingLeft: '0px', color: '#14FFEC'}}>
+                         {comments.map(item => {
+                         return <li style={{listStyle: 'none', border: '1px solid', margin: '5px'}} id={item.id} key={item.id}>
+                         {item.comment}
+                         <br/>
+                         <Button style={{marginBottom: '10px'}} variant='secondary' size="sm" onClick={deleteComment}>Remove Review</Button>
+                         </li>}
+                         )}
+                         </ul> 
+                     </Accordion.Collapse>
+                 </Accordion>
+
+         : null }
+                
+            {(inProgress === true || completed === true )? <>
+            <h2> . . .</h2>
+            <Card.Text> Am I done playing this one? {completed ? 'Yes' : 'No'} </Card.Text>
+            </> : null }
+            {inProgress ? <Button onClick={handleClick} className="gameButton">I've Finished Playing This Game</Button> : null}
             </Card.Body>
         </Card>
     )

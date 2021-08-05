@@ -51,7 +51,7 @@ class GamesController < ApplicationController
     end
 
     def gamesplayed
-        games = Game.all.sample(5)
+        games = Game.all.sample(10)
         render json: games
     end
 

@@ -7,7 +7,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
 import { usePromiseTracker } from 'react-promise-tracker';
 import Loader from 'react-loader-spinner';
+import WebFont from 'webfontloader';
 
+WebFont.load({
+  google: {
+    families: ['Cinzel','Goldman', 'cursive','sans-serif']
+  }
+});
 
 const LoadingIndicator = props => {
 
@@ -17,10 +23,10 @@ const LoadingIndicator = props => {
     promiseInProgress &&
     <>
     <div id="loader">
-      <h4>Loading Results</h4>
+      <h4 style={{fontFamily: 'Goldman', color: '#14FFEC' }}>Loading Results</h4>
     </div>
       <div id="loader">
-        <Loader type="ThreeDots" color="#2B395A" height="100" width="100" />
+        <Loader type="ThreeDots" color="#14FFEC" height="100" width="100" />
       </div>
     </>
   )

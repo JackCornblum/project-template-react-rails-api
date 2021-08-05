@@ -1,12 +1,15 @@
-import {Container, Row} from 'react-bootstrap'
+import {Container, Row, Button} from 'react-bootstrap'
 import GameCard from './GameCard'
 import Col from 'react-bootstrap/Col'
-
+import {useState, useEffect} from 'react'
 
 
 function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInterestedGames, setGameDeals, gameDeals}) {
 
-    
+    const[interested, setInterested] = useState(false)
+    const [inProgress, setInProgress] = useState(false)
+    const [completed, setCompleted] = useState(false)
+
     let interestedGameCards = interestedGames.map(game => {
             return(
                 <Col key={game.name} xs={6} md={6}>
@@ -32,32 +35,68 @@ function MyGames({currentGamer, userGames, interestedGames, setUserGames, setInt
         )}}
     )
 
-
-
-    return (
+    let renderInterested = (
         <>
-        <h3> My Games Page </h3>
-            <div>
-        <h2>My Interested Games</h2>
+            <h2 className="color-header">My Interested Games</h2>
             <Container fluid="md">
                 <Row md={4}>
                     {interestedGameCards}
                 </Row>
             </Container>
+        </>
+    )
 
-        <h2>My In-progress Games</h2>
+    let renderInProgress = (
+        <>
+            <h2 className="color-header">My In-progress Games</h2>
             <Container fluid="md">
                 <Row md={4}>
                     {inProgressGameCards}
                 </Row>
             </Container>
+        </>
+    )
 
-        <h2>My Completed Games</h2>
+    let renderCompleted = (
+        <>
+            <h2 className="color-header">My Completed Games</h2>
             <Container fluid="md">
                 <Row md={6}>
                     {completedGameCards}
                 </Row>
             </Container>
+        </>
+    )
+
+
+    return (
+        <>
+        <h3 className="color-header" > My Games Page </h3>
+            <div>
+        
+        <Button className="gameButton" onClick={e =>{ 
+            setInterested(!interested)
+            setInProgress(false)
+            setCompleted(false)
+            }}> Interested Games </Button>
+        <Button className="gameButton" onClick={e => {
+            setInProgress(!inProgress)
+            setInterested(false)
+            setCompleted(false)}}> In-Progress Games</Button>
+        <Button className="gameButton" onClick={e => {
+            setCompleted(!completed)
+            setInterested(false)
+            setInProgress(false)
+            }}> Completed Games</Button>
+        
+
+       
+            {interested ? renderInterested : null}
+            
+            {inProgress ? renderInProgress : null}
+
+            {completed ? renderCompleted : null}
+        
 
         </div>
         </>

@@ -33,9 +33,9 @@ function Signup({setCurrentGamer}) {
     }
 
     return (
-        <>
-            <h3>Signup</h3>
-            <Form onSubmit={handleSubmit}>
+        < >
+            <h3 style={{fontFamily: 'Goldman', color: '#14FFEC' }}>Signup</h3>
+            <Form onSubmit={handleSubmit} style={{fontFamily: 'Goldman', color: '#14FFEC' }}>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="name" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)}/>
@@ -52,7 +52,7 @@ function Signup({setCurrentGamer}) {
                 <Button type="submit" className="gameButton">Signup</Button>
                 
             </Form>
-            {errors.error? errors.error.map(e => <p className="error-message">{e}</p>) : null}
+            {errors.error? errors.error.map(e => <p className="error-message" style={{fontFamily: 'Goldman', color: '#14FFEC' }}>{e}</p>) : null}
         </>
     )
 

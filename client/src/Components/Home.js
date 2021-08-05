@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Carousel from 'react-multi-carousel'
 import { useHistory } from "react-router-dom"
 import CarouselCard from "./CarouselCard"
-
+import { Accordion } from "react-bootstrap"
 function Home({currentGamer}) {
 
     const [randomGames, setRandomGames] = useState([])
@@ -52,7 +52,7 @@ function Home({currentGamer}) {
 
     return (
         <>
-        <h3> Home </h3>
+        <h3 className="color-header"> Home </h3>
         {currentGamer.id ? null
         : 
         <>
@@ -62,10 +62,19 @@ function Home({currentGamer}) {
         </>
         }
 
-        <h4>Games other users are playing</h4>
+        <h4 className="color-header">Games other users are playing</h4>
         <Carousel responsive={responsive}>
             {renderGames}
         </Carousel>
+
+        {/* <Accordion defaultActiveKey="0">
+                            <Accordion.Item eventKey="1">
+                                <Accordion.Header>test</Accordion.Header>
+                            </Accordion.Item>
+                            <Accordion.Body>
+                        test
+                            </Accordion.Body>
+                        </Accordion> */}
         </>
     )
    }

@@ -1,4 +1,4 @@
-import {Card, Button, Container, Row} from 'react-bootstrap'
+import {Card, Button, Container, Row, Accordion} from 'react-bootstrap'
 import {useState, useEffect} from 'react'
 
 function Deals({gameDeals}) {
@@ -62,7 +62,7 @@ function Deals({gameDeals}) {
                     return null
                 } else {
                     return (
-                        <Card style={{ width: '15rem' }}>
+                        <Card  className='game-card' style={{padding: '0px', width: '35rem', maxHeight: '400px', marginBottom: '25px', fontFamily: 'Goldman', margin: 'auto', color: '#14FFEC' }}>
                             <Card.Body>
                                 <Card.Title>On sale for {parseInt(deal[0].savings)}% off from: {deal[1].storeName}</Card.Title>
                                 <Card.Img variant="top" style={{height: "100px", width: "100px", margin: "auto"}} src={gameDeals[0].thumb} />
@@ -89,7 +89,7 @@ function Deals({gameDeals}) {
         return (
            <>
              
-               <h3>Deals for {gameDeals[0].external} </h3>
+               <h3 style={{fontFamily: 'Goldman', color: '#14FFEC'}}>Deals for {gameDeals[0].external} </h3>
                <Container fluid="md">
                    <Row md={4}>
                        {renderedDeals}
@@ -99,7 +99,7 @@ function Deals({gameDeals}) {
        )
     } else
     return (
-        <h3>No Deals Found</h3>
+        <h3 style={{fontFamily: 'Goldman', color: '#14FFEC' }}>No Deals Found</h3>
     )
 
 
