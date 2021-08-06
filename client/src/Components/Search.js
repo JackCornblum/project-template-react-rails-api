@@ -6,7 +6,7 @@ import { trackPromise } from 'react-promise-tracker'
 import Col from 'react-bootstrap/Col'
 import {Container, Row} from 'react-bootstrap'
 
-function Search({currentGamer, userGames, setUserGames, interestedGames, setInterestedGames}) {
+function Search({setInterested, setInProgress, currentGamer, userGames, setUserGames, interestedGames, setInterestedGames}) {
 
     const [searchedGames, setSearchedGames] = useState("")
     const [resultsArray, setResultsArray] = useState([])
@@ -40,7 +40,7 @@ function Search({currentGamer, userGames, setUserGames, interestedGames, setInte
     let searchCards = resultsArray.map(game => {
         return(
             <Col key={game.name} xs={6} md={4}>
-        <SearchedGameCard interestedGames={interestedGames} setInterestedGames={setInterestedGames} setUserGames={setUserGames} userGames={userGames} currentGamer={currentGamer} image={game.image_id} name={game.name} genre={game.genre_name} currentGamer={currentGamer} /> 
+        <SearchedGameCard setInterested={setInterested} setInProgress={setInProgress} interestedGames={interestedGames} setInterestedGames={setInterestedGames} setUserGames={setUserGames} userGames={userGames} currentGamer={currentGamer} image={game.image_id} name={game.name} genre={game.genre_name} currentGamer={currentGamer} /> 
         </Col>)}
   
         )

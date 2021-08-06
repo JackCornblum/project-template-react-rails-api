@@ -19,6 +19,8 @@ function App() {
   const [userGames, setUserGames] = useState([])
   const [interestedGames, setInterestedGames] = useState([])
   const [gameDeals, setGameDeals] = useState([])
+  const[interested, setInterested] = useState(false)
+  const [inProgress, setInProgress] = useState(false)
 
 
 useEffect(() => {
@@ -69,10 +71,10 @@ console.log(userGames)
           <Login setCurrentGamer={setCurrentGamer} />
         </Route>
         <Route exact path="/mygames">
-          <MyGames setGameDeals={setGameDeals} gameDeals={gameDeals} setInterestedGames={setInterestedGames} userGames={userGames} setUserGames={setUserGames} interestedGames={interestedGames} currentGamer={currentGamer}/>
+          <MyGames setInProgress={setInProgress} setInterested={setInterested} interested={interested} inProgress={inProgress} setGameDeals={setGameDeals} gameDeals={gameDeals} setInterestedGames={setInterestedGames} userGames={userGames} setUserGames={setUserGames} interestedGames={interestedGames} currentGamer={currentGamer}/>
         </Route>
         <Route exact path="/search">
-          <Search setInterestedGames={setInterestedGames} interestedGames={interestedGames} userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer}/>
+          <Search setInProgress={setInProgress} setInterested={setInterested} setInterestedGames={setInterestedGames} interestedGames={interestedGames} userGames={userGames} setUserGames={setUserGames} currentGamer={currentGamer}/>
         </Route>
         <Route exact path="/signup">
           <Signup setCurrentGamer={setCurrentGamer} />

@@ -1,7 +1,7 @@
 import {Card, Button} from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
 
-function SearchedGameCard({name, image, genre, currentGamer, userGames, setUserGames, interestedGames, setInterestedGames}) {
+function SearchedGameCard({setInterested, setInProgress, name, image, genre, currentGamer, userGames, setUserGames, interestedGames, setInterestedGames}) {
 
     const history = useHistory()
 
@@ -35,7 +35,9 @@ function SearchedGameCard({name, image, genre, currentGamer, userGames, setUserG
             const gameData = await res.json()
             if (gameData.id) {
                 setInterestedGames([...interestedGames, gameData])
+                setInterested(true)
                 history.push("/mygames")
+                
             }
         } else { 
             const res = await fetch('/games', {
@@ -48,6 +50,7 @@ function SearchedGameCard({name, image, genre, currentGamer, userGames, setUserG
            const gameData = await res.json()
            if (gameData.id) {
                setUserGames([...userGames, gameData])
+               setInProgress(true)
                history.push("/mygames")
            }
             
